@@ -42,5 +42,11 @@ public class TaskController implements TaskSwagger {
     public ResponseEntity<Page<TaskResponse>> search(@RequestParam String text, Pageable pageable) {
         return ResponseEntity.ok(service.searchTask(pageable, text));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> remove(@PathVariable Long id) {
+        service.removeTask(id);
+        return ResponseEntity.noContent().build();
+    }
 }
 

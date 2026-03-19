@@ -8,6 +8,7 @@ import com.vizu.backend.domain.enums.Priority;
 import com.vizu.backend.domain.enums.Role;
 import com.vizu.backend.domain.enums.Status;
 import com.vizu.backend.domain.model.Project;
+import com.vizu.backend.domain.model.ProjectMember;
 import com.vizu.backend.domain.model.Task;
 import com.vizu.backend.domain.model.User;
 import com.vizu.backend.infraestructure.repository.ProjectMemberRepository;
@@ -93,6 +94,14 @@ public class TaskServiceImpl implements TaskService {
         Page<Task> tasks = taskRepository
                 .findByTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCase(text, text, pageable);
         return tasks.map(TaskMapper::toResponse);
+    }
+
+    @Transactional
+    public void removeTask(Long id) {
+        Task task = taskRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Task not found"));
+
+        taskRepository.delete(task);
     }
 
     private void validateMember(Long userId, Long projectId) {

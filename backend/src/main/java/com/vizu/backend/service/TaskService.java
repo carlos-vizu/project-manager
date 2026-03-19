@@ -16,4 +16,5 @@ public interface TaskService {
 
     public Page<TaskResponse> searchTask(Pageable pageable, String text);
 
+    public void removeTask(Long id);
 }
