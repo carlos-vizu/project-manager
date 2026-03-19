@@ -28,7 +28,7 @@ public class TaskController implements TaskSwagger {
         return ResponseEntity.ok(service.createTask(req));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{taskId}/member/{reqUserId}")
     public ResponseEntity<TaskResponse> update( @PathVariable Long taskId, @PathVariable Long reqUserId, @RequestBody UpdateTaskRequest req) {
         return ResponseEntity.ok(service.updateTask(taskId, req, reqUserId));
     }
