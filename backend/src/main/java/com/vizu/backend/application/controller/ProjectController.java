@@ -2,6 +2,7 @@ package com.vizu.backend.application.controller;
 
 import com.vizu.backend.application.controller.dto.response.ProjectMemberResponse;
 import com.vizu.backend.application.controller.dto.response.ProjectResponse;
+import com.vizu.backend.application.controller.swagger.ProjectSwagger;
 import com.vizu.backend.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,7 +14,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/projects")
-public class ProjectController {
+public class ProjectController implements ProjectSwagger {
 
     private final ProjectService projectService;
 

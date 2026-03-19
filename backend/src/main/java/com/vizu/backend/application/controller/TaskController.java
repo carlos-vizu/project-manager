@@ -4,6 +4,8 @@ import com.vizu.backend.application.controller.dto.request.CreateTaskRequest;
 import com.vizu.backend.application.controller.dto.request.TaskFilter;
 import com.vizu.backend.application.controller.dto.request.UpdateTaskRequest;
 import com.vizu.backend.application.controller.dto.response.TaskResponse;
+import com.vizu.backend.application.controller.swagger.TaskSwagger;
+import com.vizu.backend.domain.model.Task;
 import com.vizu.backend.service.TaskService;
 import org.apache.coyote.Response;
 import org.springframework.data.domain.Page;
@@ -13,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/tasks")
-public class TaskController {
+public class TaskController implements TaskSwagger {
 
     private final TaskService service;
 

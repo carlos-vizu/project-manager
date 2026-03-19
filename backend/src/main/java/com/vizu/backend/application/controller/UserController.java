@@ -1,6 +1,7 @@
 package com.vizu.backend.application.controller;
 
 import com.vizu.backend.application.controller.dto.response.UserSummaryResponse;
+import com.vizu.backend.application.controller.swagger.UserSwagger;
 import com.vizu.backend.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -8,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/users")
 @CrossOrigin(origins = "*")
-public class UserController {
+public class UserController implements UserSwagger {
 
     private final UserService userService;
 
