@@ -20,7 +20,7 @@ public class Project {
     private String description;
 
     @ManyToOne
-    @Column(name="owner_id", nullable = false)
+    @JoinColumn(name="owner_id", nullable = false)
     private User owner;
 
     @OneToMany(mappedBy = "project")
@@ -72,4 +72,5 @@ public class Project {
     public void setTasks(List<Task> tasks) {
         this.tasks = tasks;
     }
+
 }
