@@ -1,4 +1,4 @@
-package com.vizu.backend.application.controller.dto;
+package com.vizu.backend.application.controller;
 
 import com.vizu.backend.application.controller.dto.response.UserSummaryResponse;
 import com.vizu.backend.service.UserService;
