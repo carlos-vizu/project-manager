@@ -3,6 +3,8 @@ package com.vizu.backend.domain.model;
 import com.vizu.backend.domain.enums.Priority;
 import com.vizu.backend.domain.enums.Status;
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -29,9 +31,11 @@ public class Task {
     @Column(name="priority")
     private Priority priority;
 
+    @CreationTimestamp
     @Column(name="created_at")
     private LocalDateTime createdAt;
 
+    @UpdateTimestamp
     @Column(name="updated_at")
     private LocalDateTime updatedAt;
 
