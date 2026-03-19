@@ -93,7 +93,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     public Page<ProjectMemberResponse> listMembers(Pageable pageable, Long projectId) {
-        Page<ProjectMember> projectMembers = projectMemberRepository.findAllByProjectIdOrderByNameAsc(projectId, pageable);
+        Page<ProjectMember> projectMembers = projectMemberRepository.findAllByProjectId(projectId, pageable);
         return projectMembers.map(ProjectMemberMapper::toResponse);
     }
 
