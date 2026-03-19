@@ -5,9 +5,11 @@ import com.vizu.backend.application.controller.dto.response.ProjectResponse;
 import com.vizu.backend.domain.enums.Role;
 import com.vizu.backend.domain.model.Project;
 import com.vizu.backend.domain.model.ProjectMember;
+import com.vizu.backend.domain.model.Task;
 import com.vizu.backend.domain.model.User;
 import com.vizu.backend.infraestructure.repository.ProjectMemberRepository;
 import com.vizu.backend.infraestructure.repository.ProjectRepository;
+import com.vizu.backend.infraestructure.repository.TaskRepository;
 import com.vizu.backend.infraestructure.repository.UserRepository;
 import com.vizu.backend.mappers.ProjectMapper;
 import com.vizu.backend.mappers.ProjectMemberMapper;
@@ -18,6 +20,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class ProjectServiceImpl implements ProjectService {
@@ -25,11 +29,13 @@ public class ProjectServiceImpl implements ProjectService {
     private final ProjectRepository projectRepository;
     private final ProjectMemberRepository projectMemberRepository;
     private final UserRepository userRepository;
+    private final TaskRepository taskRepository;
 
-    public ProjectServiceImpl(ProjectRepository projectRepository, ProjectMemberRepository projectMemberRepository, UserRepository userRepository) {
+    public ProjectServiceImpl(ProjectRepository projectRepository, ProjectMemberRepository projectMemberRepository, UserRepository userRepository, TaskRepository taskRepository) {
         this.projectRepository = projectRepository;
         this.projectMemberRepository = projectMemberRepository;
         this.userRepository = userRepository;
+        this.taskRepository = taskRepository;
     }
 
     public Page<ProjectResponse> getAllProjects(Pageable pageable) {
@@ -89,5 +95,26 @@ public class ProjectServiceImpl implements ProjectService {
     public Page<ProjectMemberResponse> listMembers(Pageable pageable, Long projectId) {
         Page<ProjectMember> projectMembers = projectMemberRepository.findAllByProjectIdOrderByNameAsc(projectId, pageable);
         return projectMembers.map(ProjectMemberMapper::toResponse);
+    }
+
+    public Map<String, Map<String, Long>> summary(Long projectId) {
+        List<Task> tasks = taskRepository.findByProjectId(projectId);
+
+        Map<String, Long> byStatus = tasks.stream()
+                .collect(Collectors.groupingBy(
+                        t -> t.getStatus().name(),
+                        Collectors.counting()
+                ));
+
+        Map<String, Long> byPriority = tasks.stream()
+                .collect(Collectors.groupingBy(
+                        t -> t.getPriority().name(),
+                        Collectors.counting()
+                ));
+
+        return Map.of(
+                "byStatus", byStatus,
+                "byPriority", byPriority
+        );
     }
 }

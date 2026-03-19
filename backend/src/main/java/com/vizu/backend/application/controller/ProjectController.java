@@ -9,6 +9,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/projects")
 public class ProjectController {
@@ -52,5 +54,10 @@ public class ProjectController {
     @GetMapping("/{id}/members")
     public ResponseEntity<Page<ProjectMemberResponse>> members(@PathVariable Long id, Pageable pageable) {
         return ResponseEntity.ok(projectService.listMembers(pageable, id));
+    }
+
+    @GetMapping("/{id}/summary")
+    public ResponseEntity<Map<String, Map<String, Long>>> summary(@PathVariable Long id) {
+        return ResponseEntity.ok(projectService.summary(id));
     }
 }
