@@ -4,12 +4,29 @@ import java.time.LocalDateTime;
 
 public class TaskFilter {
 
+    private String id;
     private String status;
     private String priority;
     private Long assigneeId;
     private Long projectId;
     private LocalDateTime startDate;
     private LocalDateTime deadline;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public LocalDateTime getDeadline() {
+        return deadline;
+    }
+
+    public void setDeadline(LocalDateTime deadline) {
+        this.deadline = deadline;
+    }
 
     public String getStatus() {
         return status;

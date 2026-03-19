@@ -15,6 +15,10 @@ public class TaskSpecification {
 
             List<Predicate> predicates = new ArrayList<>();
 
+            if (filter.getId() != null) {
+                predicates.add(cb.equal(root.get("id"), filter.getId()));
+            }
+
             if (filter.getProjectId() != null) {
                 predicates.add(cb.equal(root.get("project").get("id"), filter.getProjectId()));
             }
