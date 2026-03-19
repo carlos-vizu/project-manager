@@ -43,11 +43,11 @@ public class Task {
     private LocalDateTime deadline;
 
     @ManyToOne
-    @Column(name = "project_id")
+    @JoinColumn(name = "project_id")
     private Project project;
 
     @ManyToOne
-    @Column(name = "assignee_id")
+    @JoinColumn(name = "assignee_id")
     private User assignee;
 
     public Long getId() {
