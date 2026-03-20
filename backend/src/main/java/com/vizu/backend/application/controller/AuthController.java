@@ -1,9 +1,7 @@
 package com.vizu.backend.application.controller;
 
 import com.vizu.backend.application.controller.dto.request.LoginRequest;
-import com.vizu.backend.domain.model.User;
-import com.vizu.backend.infraestructure.repository.UserRepository;
-import com.vizu.backend.infraestructure.security.JwtService;
+import com.vizu.backend.application.controller.swagger.AuthSwagger;
 import com.vizu.backend.service.AuthService;
 
 import org.springframework.http.HttpStatus;
@@ -13,11 +11,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Map;
 
 @RestController
-@RequestMapping("/api/auth")
-public class AuthController {
+@RequestMapping("/auth")
+public class AuthController implements AuthSwagger{
 
     private final AuthService service;
 
